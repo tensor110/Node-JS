@@ -24,7 +24,8 @@
 // console.log(math.subtract(2,3))
 
 // Importing JSON 
-const data= require("./6data.json")
-console.log(data)
-console.log(data.name)
-console.log(data.Address)
+// const data= require("./6data.json")
+// console.log(data)
+// console.log(data.name)
+// console.log(data.Address)
+
