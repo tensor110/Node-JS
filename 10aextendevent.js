@@ -1,5 +1,5 @@
+// Extending from EventEmitter
 const EventEmitter = require("node:events")
-
 class PizzaShop extends EventEmitter{
     constructor(){
         super()

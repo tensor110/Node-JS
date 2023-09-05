@@ -1,3 +1,4 @@
+// Extending from EventEmitter
 class DrinkMachine{
     serveDrink(size){
         if(size=="large")
