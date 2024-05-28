@@ -1,0 +1,15 @@
+Every method in node.js that has the "sync" suffix always runs on the main thread and is blocking
+
+A few async methods like fs.readFile and crypto.pbkdf2 run on a separate thread in Iibuv's thread pool. They do run synchronously in their own thread but as far as the main thread is concerned, it appears as if the method is running asynchronously
+
+Libuv's thread pool has 4 threads
+
+By increasing the thread pool size, we are able to improve the total time taken to
+run multiple calls of an asynchronous method like pbkdf2
+
+Increasing the thread pool size can help with performance but that is limited by the
+number of available CPU cores
+
+Although both crypto.pbkdf2 and https.request are asynchronous, https.request method does not seem to use the thread pool
+https.request does not seem to be affected by the number of CPU cores either
+It is because https.request is a network input/output operation and not a CPU bound operation. It does not use the thread pool

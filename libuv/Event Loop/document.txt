@@ -1,0 +1,39 @@
+It is a C program and is part of Iibuv
+A design pattern that orchestrates or co-ordinates the execution of synchronous and asynchronous code in Node.js
+
+1. All user written synchronous JavaScript code takes priority over async code that the runtime would like to eventually execute
+2. All callbacks in nextTick queue are executed before callbacks in promise queue
+
+    Order -> NextTick queue > Promise queue
+
+3. Callbacks in the microtask queues are executed before callbacks in the timer queue
+4. Callbacks in microtask queues are executed in between the execution of callbacks in the timer queue
+5. Timer queue callbacks are executed in FIFO order
+
+    microtask queue = NextTick queue + Promise queue 
+    Order -> NextTick queue > Promise queue > Timer queue
+
+6. Callbacks in the microtask queues are executed before callbacks in the I/O queue
+7. When running set Timeout with delay 0ms and an I/O async method, the order of execution can never be guaranteed
+8. I/O queue callbacks are executed after Microtask queues callbacks and Timer queue callbacks
+
+    Order -> NextTick queue > Promise queue > Timer queue > I/O queue
+
+9. I/O events are polled and callback functions are added to the I/O queue only after the I/O is complete
+10. Check queue callbacks are executed after Microtask queues callbacks, Timer queue callbacks and I/O queue callbacks are executed
+11. Microtask queues callbacks are executed in between check queue callbacks
+
+    Order -> NextTick queue > Promise queue > Timer queue > I/O queue > Check queue
+
+12. When running setTimeout with delay 0ms and setlmmediate method, the order of execution can never be guaranteed
+13. Close queue callbacks are executed after all other queues callbacks in a given iteration of the event loop
+
+    Order -> NextTick queue > Promise queue > Timer queue > I/O queue > Check queue > Close queue
+
+NOTE:
+* We use process.nextTick() method to queue into the nextTick queue
+* We resolve or reject a Promise to queue into the Promise queue
+* We use setTimeout or setlnterva/ to queue into the timer queue
+* Execute an async method to queue into the 1/0 queue
+* Use setlmmediate function to queue into the check queue and finally
+* Attach close event listeners to queue into the close queue
