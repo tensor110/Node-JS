@@ -5,11 +5,11 @@ const numOfCPUs = require("os").cpus().length; //returns no of cores our cpu hav
 console.log(numOfCPUs);
 
 if (cluster.isMaster) {
-//   console.log(`Master process ${pocess.pid} is running`);
+  console.log(`Master process ${process.pid} is running`);
   cluster.fork();
   cluster.fork();
 } else {
-//   console.log(`Worker ${process.pid} started`);
+  console.log(`Worker ${process.pid} started`);
   const server = http.createServer((req, res) => {
     if (req.url === "/") {
       res.writeHead(200, { "Content-Type": "text/plain" });
