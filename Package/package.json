@@ -1,0 +1,16 @@
+{
+  "name": "maheswar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "upper-case": "^3.0.0"
+  }
+}
